@@ -1,8 +1,8 @@
 {
     "name": "wpeasy/wpe-analyser",
-    "description": "WPEasy Tools for WordPress",
+    "description": "WPEasy Analyser Tools for WordPress",
     "type": "project",
-    "license": "GPL-2.0",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Alan Balir",
