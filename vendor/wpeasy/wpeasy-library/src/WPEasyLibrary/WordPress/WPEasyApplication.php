@@ -53,6 +53,20 @@ class WPEasyApplication
 
         add_action('plugins_loaded', [__CLASS__, 'initPlugins']);
 
+        if(WP_DEBUG) add_action('admin_notices', [__CLASS__, 'adminDebugNotices']);
+    }
+
+    static function adminDebugNotices()
+    {
+        $LibraryServedFrom = self::$firstCallingPluginConf['pluginName'];
+        $message = <<<HTML
+<div class="notice notice-info ">
+<h4>WordPress is in DEBUG Mode. The following notices are for the WPEasyLibrary.</h4>
+<p>Served from plugin: {$LibraryServedFrom}</p>
+</div>
+HTML;
+
+        echo $message;
     }
 
     static function registerLoadedPlugin($config)
