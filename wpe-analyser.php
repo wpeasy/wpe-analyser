@@ -3,7 +3,7 @@
  * Plugin Name: WPEasy Analyser
  * Plugin URI:
  * Description: Tool to do analysis of a WordPress site status
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Alan Blair
  * Author URI:
  * Text Domain: wpeasy
