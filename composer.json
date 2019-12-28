@@ -1,0 +1,29 @@
+{
+    "name": "wpeasy/wpe-analyser",
+    "description": "WPEasy Tools for WordPress",
+    "type": "project",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Alan Balir",
+            "email": "alan@wpeasy.net"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/wpeasy/wpeasy-library.git"
+        }
+    ],
+    "require": {
+        "wpeasy/wpeasy-library": "1.*",
+        "philcook/gtmetrix": "^1.0",
+        "gabrielelana/byte-units": "^0.5.0",
+        "jeremykendall/php-domain-parser": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "WPEasyAnalyser\\": "src/WPEasyAnalyser/"
+        }
+    }
+}

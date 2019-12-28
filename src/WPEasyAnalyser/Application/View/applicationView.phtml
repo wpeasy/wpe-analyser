@@ -1,0 +1,36 @@
+<?php
+$loadedModules = \WPEasyAnalyser\Application\Model\ApplicationModel::$loadedModules;
+?>
+<div class="wrap wpe-admin-wrapper">
+    <h1>WPEasy Analyser</h1>
+
+    <div class="wpe-application-tabs">
+        <ul class="nav nav-tabs">
+            <?php
+            $i = 0;
+            foreach ($loadedModules as $controller=>$config):
+                $id = sanitize_key($config['moduleName']);
+                $active = $i === 0 ? 'active' : '';
+                $i++;
+                ?>
+                <li class="nav-item ">
+                    <a class="nav-link <?= $active ?>" data-toggle="tab" href="#<?= $id ?>"><?= $config['moduleName'] ?></a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content container-fluid">
+            <?php
+            $i = 0;
+            foreach ($loadedModules  as $controller=>$config):
+            $id = sanitize_key($config['moduleName']);
+            $active = $i === 0 ? 'active' : 'fade';
+            $i++;
+            ?>
+            <div class="tab-pane  <?= $active ?>" id="<?= $id ?>">
+                <?= $controller::getDashboardView() ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>

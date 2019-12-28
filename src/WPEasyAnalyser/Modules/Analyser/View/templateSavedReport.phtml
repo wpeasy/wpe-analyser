@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WEPasy Report</title>
+    <link rel='stylesheet' id='wpe-lib-common-css'  href='/wp-content/plugins/wpe-analyser/vendor/alanblair/wpeasy-library/assets/css/wpe-lib-common.style.css' media='all' />
+    <link rel='stylesheet' id='wpe-lib-admin-css'  href='/wp-content/plugins/wpe-analyser/vendor/alanblair/wpeasy-library/assets/css/wpe-lib-admin.style.css' media='all' />
+<style>
+    html{ font-size: 12px}
+    body{ margin: 0; }
+    .report-header {
+        padding: 15px 0;
+        background-color: #5d5d5d;
+    }
+
+    .report-header h2, .report-header h3 {
+        color: white;
+    }
+
+</style>
+</head>
+<body>
+<div class="wpe-admin-wrapper">
+    <div class="container-fluid mb-2 report-header">
+        <div class="row">
+            <div class="col">
+                <img src="<?= $assetsUrl ?>/img/logo-alt@2x.png"/>
+            </div>
+            <div class="col text-sm-right">
+                <h2><?= $reportName ?></h2><br/>
+                <h3><?= $dateTime ?></h3>
+            </div>
+        </div>
+    </div>
+    <?= $htmlContent ?>
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+.wpe-spinner-small{
+  content: "";
+  &:after{
+    content: url(../img/ajax-loader.gif);
+  }
+}

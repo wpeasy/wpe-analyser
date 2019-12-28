@@ -1,0 +1,18 @@
+@import "../../common/scss/variables";
+@import "~bootstrap-scss/functions";
+@import "~bootstrap-scss/mixins";
+@import "~bootstrap-scss/variables";
+
+
+.wpe-div-table{
+  .row {
+    padding: 10px 0;
+  }
+
+  &.table-striped{
+    .row:nth-of-type(even){
+      background-color: $gray-100;
+    }
+  }
+
+}

@@ -1,0 +1,55 @@
+<div class="wpe-shortcode-table">
+    <table class="table  table-striped table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>Description</th>
+            <th>Shortcode</th>
+            <th>Attributes</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tag, s in shortcodes %}
+        {% set attStr = "" %}
+        {% if s.atts|length %}
+            {% for key,atts in s.atts %}
+                {% set attStr = attStr ~ key ~"=\"" ~ atts.default ~ "\" " %}
+            {% endfor %}
+        {% endif %}
+        <tr>
+            <td>{{ s.description }}</td>
+            <td>
+                {% if s.selfEnclosing %}
+                    <div class="wpe-copy-to-clipboard">[{{ tag }}]</div>
+                {% endif %}
+                {% if s.enclosing %}
+                    <div class="wpe-copy-to-clipboard">[{{ tag }} {{ attStr }}]Your Content[/{{ tag }}]</div>
+                {% endif %}
+            </td>
+            <td>
+                {% if s.atts|length %}
+                    <table class="table table-striped wpe-sc-atts-table table-sm">
+                        <thead>
+                        <tr>
+                            <th>Att</th>
+                            <th>Desc</th>
+                            <th>Default</th>
+                        </tr>
+                        </thead>
+                        {% for key,atts in s.atts %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ atts.description }}</td>
+                                <td>{{ atts.default }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tbody></tbody>
+                    </table>
+                {% else %}
+                    <b>None</b>
+                {% endif %}
+            </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+</div>

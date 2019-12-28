@@ -1,0 +1,10 @@
+<?php
+
+?>
+<ul class="saved-reports-list mb-0">
+    <?php foreach($reports as $date=>$file): ?>
+	<li class="saved-report-item d-inline-block mr-2">
+		<a type="button" class="btn btn-outline-primary btn-sm" href="<?= $file['url'] ?>" target="_blank"><?= date('d/m/Y H:i a', $date) ?> (<?= $file['name'] ?>)</a>
+	</li>
+	<? endforeach; ?>
+</ul>

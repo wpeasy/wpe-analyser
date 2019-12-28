@@ -1,0 +1,268 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "4a6d9498263992c2806ac27a86b6aaf1",
+    "packages": [
+        {
+            "name": "gabrielelana/byte-units",
+            "version": "0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gabrielelana/byte-units.git",
+                "reference": "eaf7b998535578c7160be30b39904a8326bb9bb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gabrielelana/byte-units/zipball/eaf7b998535578c7160be30b39904a8326bb9bb8",
+                "reference": "eaf7b998535578c7160be30b39904a8326bb9bb8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.0,<6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ByteUnits\\": "src/ByteUnits"
+                },
+                "files": [
+                    "src/ByteUnits/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriele Lana",
+                    "email": "gabriele.lana@gmail.com"
+                }
+            ],
+            "description": "Library to parse, format and convert byte units",
+            "homepage": "https://github.com/gabrielelana/byte-units",
+            "keywords": [
+                "byte",
+                "convert",
+                "format",
+                "parse",
+                "size",
+                "units"
+            ],
+            "time": "2018-01-11T10:40:03+00:00"
+        },
+        {
+            "name": "jeremykendall/php-domain-parser",
+            "version": "5.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykendall/php-domain-parser.git",
+                "reference": "93efea6362ee769d41754336abfb29aead38cfe2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykendall/php-domain-parser/zipball/93efea6362ee769d41754336abfb29aead38cfe2",
+                "reference": "93efea6362ee769d41754336abfb29aead38cfe2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "php": ">=7.0",
+                "psr/simple-cache": "^1.0.1"
+            },
+            "require-dev": {
+                "composer/composer": "^1.6",
+                "friendsofphp/php-cs-fixer": "^2.7",
+                "mikey179/vfsstream": "^1.6",
+                "phpstan/phpstan": "^0.9.2",
+                "phpstan/phpstan-phpunit": "^0.9.4",
+                "phpstan/phpstan-strict-rules": "^0.9.0",
+                "phpunit/phpunit": "^6.3"
+            },
+            "suggest": {
+                "ext-curl": "To use the package http client",
+                "league/uri-parser": "To parse URL and validate host",
+                "psr/simple-cache-implementation": "To enable using other cache providers"
+            },
+            "bin": [
+                "bin/update-psl"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pdp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Kendall",
+                    "homepage": "http://about.me/jeremykendall",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/jeremykendall/php-domain-parser/graphs/contributors"
+                },
+                {
+                    "name": "Ignace Nyamagana Butera",
+                    "homepage": "http://nyamsprod.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Public Suffix List based URL parsing implemented in PHP.",
+            "homepage": "https://github.com/jeremykendall/php-domain-parser",
+            "keywords": [
+                "PSL",
+                "Public Suffix List",
+                "domain parsing",
+                "icann",
+                "idn"
+            ],
+            "time": "2019-04-14T07:14:35+00:00"
+        },
+        {
+            "name": "philcook/gtmetrix",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/philcook/php-gtmetrix.git",
+                "reference": "9a5c61449a0a42bc77188e752909608548cf292f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/philcook/php-gtmetrix/zipball/9a5c61449a0a42bc77188e752909608548cf292f",
+                "reference": "9a5c61449a0a42bc77188e752909608548cf292f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "apigen/apigen": "~4.1",
+                "phing/phing": "~2.11",
+                "phpunit/phpunit": "~4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Entrecore\\GTMetrixClient\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "GTMetrix API client for PHP",
+            "time": "2018-05-25T20:33:17+00:00"
+        },
+        {
+            "name": "psr/simple-cache",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "wpeasy/wpeasy-library",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wpeasy/wpeasy-library.git",
+                "reference": "ad0df78eb17b87aae17b3fddd6b0b08e0ea08ebc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wpeasy/wpeasy-library/zipball/ad0df78eb17b87aae17b3fddd6b0b08e0ea08ebc",
+                "reference": "ad0df78eb17b87aae17b3fddd6b0b08e0ea08ebc",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WPEasyLibrary\\": "src/WPEasyLibrary/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Alan Blair",
+                    "email": "alan@wpeasy.net"
+                }
+            ],
+            "description": "Library used by WPEasy WordPress plugins",
+            "support": {
+                "source": "https://github.com/wpeasy/wpeasy-library/tree/v1.0.4",
+                "issues": "https://github.com/wpeasy/wpeasy-library/issues"
+            },
+            "time": "2019-12-27T23:17:12+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

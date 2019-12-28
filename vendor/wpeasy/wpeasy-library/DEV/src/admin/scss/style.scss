@@ -1,0 +1,13 @@
+@import "application";
+@import "tables";
+@import "progress_bar_indeterminate";
+
+//Namespace to avoid conflicts
+.wpe-admin-wrapper {
+  * {
+    box-sizing: border-box;
+  }
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  @import "bootstrap";
+}

@@ -1,0 +1,117 @@
+<?php
+$wpAllPlugins    = get_plugins();
+$wpActivePlugins = get_option('active_plugins');
+$wpActivePlugins[] = 'test';
+
+$inactivePlugins = [];
+$activePlugins = [];
+
+$allPluginSlugs = array_map(function ($el){
+	return explode('/', $el)[0];
+},array_keys($wpAllPlugins));
+
+/****************
+ * Latest plugin info from WordPress API
+ */
+
+$args = [
+	'slugs' => $allPluginSlugs,
+	'fields' => [
+		'sections'=> false,
+		'contributors' => false,
+		'screenshots' => false,
+		'tags' => false,
+		'versions' => false,
+		'ratings' => false
+	]
+];
+
+$url = 'http://api.wordpress.org/plugins/info/1.2/';
+$url = add_query_arg( [
+	'action'  => 'plugin_information', // first param for plugins_api()
+	'request' => $args,                // second param for plugins_api()
+], $url );
+
+
+$res = wp_remote_get( $url );
+if ( ! is_wp_error( $res ) ) {
+	$data = json_decode( wp_remote_retrieve_body( $res ) );
+	$result = (array)$data ;
+
+	foreach($wpAllPlugins as $key=>&$props){
+		$slug = explode('/', $key)[0];
+		//var_dump($result[$slug]);
+		if(array_key_exists($slug, $result ) && !property_exists($result[$slug], 'error' )){
+			$obj = $result[$slug];
+			$props['currentVersion'] = @$obj->version;
+			$props['isCurrent'] = version_compare(@$obj->version, $props['Version'] ) === 0;
+		}else{
+			$props['currentVersion'] = 'UNKNOWN';
+			$props['isCurrent'] = true;
+		}
+	}
+
+}else{
+	echo 'Api Fetch Error';
+}
+
+
+/**************************
+ * Separate active an inactive plugins
+ *
+ */
+foreach($wpAllPlugins as $pluginKey=>$pluginDetail){
+	if(in_array($pluginKey, $wpActivePlugins)){
+		$activePlugins[] = $pluginDetail;
+	}else{
+		$inactivePlugins[] = $pluginDetail;
+	}
+}
+
+?>
+<table class="table table-bordered table-sm">
+	<thead class="thead-dark">
+	<tr>
+		<th>Plugin</th>
+		<th>Installed Version</th>
+		<th>Current Version</th>
+		<th>Up to date?</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td colspan="4"><h4>Active Plugins</h4></td>
+	</tr>
+	<?php foreach ($activePlugins as $active_plugin) :
+		$class = $active_plugin['isCurrent']? 'table-success':'table-danger';
+		?>
+
+	<tr class=" <?= $class ?>">
+		<td><?= $active_plugin['Name'] ?></td>
+		<td><?= $active_plugin['Version'] ?></td>
+		<td><?= $active_plugin['currentVersion'] ?></td>
+		<td><?= $active_plugin['isCurrent']? 'YES' : 'NO' ?></td>
+	</tr>
+	<?php endforeach; ?>
+	<tr>
+		<td colspan="4"><h4>Not Active Plugins</h4></td>
+	</tr>
+	<?php foreach ($inactivePlugins as $inactive_plugin) :
+		$class = $inactive_plugin['isCurrent']? 'table-warning':'table-danger';
+		?>
+
+		<tr class=" <?= $class ?>">
+			<td><?= $inactive_plugin['Name'] ?></td>
+			<td><?= $inactive_plugin['Version'] ?></td>
+			<td><?= $inactive_plugin['currentVersion'] ?></td>
+			<td><?= $inactive_plugin['isCurrent']? 'YES' : 'NO' ?></td>
+		</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>
+<p>*Notes:</p>
+<ul>
+	<li>All inactive plugins should be removed to improve security.</li>
+	<li>All active plugins that are not up to dat should be updated.</li>
+</ul>
+

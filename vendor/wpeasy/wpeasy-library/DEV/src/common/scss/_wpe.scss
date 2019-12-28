@@ -1,0 +1,17 @@
+@import "variables";
+@import "~bootstrap-scss/functions";
+@import "~bootstrap-scss/mixins";
+@import "~bootstrap-scss/variables";
+
+.wpe-card-container {
+  box-shadow: $box-shadow-sm;
+  &.wpe-card-info{
+    .wpe-card-header{
+      background-color: $info;
+      color: #fff;
+    }
+    .wpe-card-body{
+      background-color: $gray-100;
+    }
+  }
+}

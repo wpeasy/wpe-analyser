@@ -1,0 +1,179 @@
+<?php
+$commonNonce = \WPEasyAnalyser\Modules\Analyser\Controller\ModuleController::$ajaxNonce;
+$settings    = \WPEasyAnalyser\Modules\Analyser\Controller\SettingsController::$currentOptions;
+
+$isGTMetrixDisable      = empty( $settings['gtmetrix_api_key'] ) ? 'disabled' : '';
+$isSecurityTrailDisable = empty( $settings['securitytrails_api_key'] ) ? 'disabled' : '';
+
+?>
+<nav class="navbar navbar-dark bg-dark mb-2">
+    <a class="navbar-brand" href="#">Report</a>
+    <ul class="navbar-nav">
+        <li class="nav-item ">
+            <button
+                    id="saveReportButton"
+                    class="btn btn-primary action-btn"
+                    data-ajax-action="wpe_analyser_save_report">
+                Save Reports
+            </button>
+        </li>
+    </ul>
+</nav>
+
+<div id="saveReportContainer"
+     class="d-none" id="wpe_analyser_save_report"
+     data-action="wpe_analyser_save_report"
+     data-trigger-selector="#saveReportButton"
+     data-trigger-event="click"
+     data-body-selector="#saveReportContainer .message-body"
+     data-data='{}'
+>
+    <div class="message-body">
+
+    </div>
+</div>
+
+<div id="report-content">
+    <div class="container-fluid">
+        <!-- GENERAL -->
+        <div class="row">
+            <div class="col">
+                <div class="card w-100 report-run-immediate" id="wpe_analyser_get_site_status"
+                     data-action="wpe_analyser_get_site_status"
+                     data-trigger-event="immediate"
+                     data-body-selector="#wpe_analyser_get_site_status .card-body"
+                     data-data='{}'
+                >
+                    <div class="card-header">General</div>
+                    <div class="card-body">
+                        <div class="progress d-none" style="position: relative;">
+                            <div class="progress-bar progress-bar-striped indeterminate"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- THEMES -->
+        <div class="row">
+            <div class="col">
+                <div class="card w-100 report-run-immediate" id="wpe_analyser_get_themes"
+                     data-action="wpe_analyser_get_themes"
+                     data-trigger-event="immediate"
+                     data-body-selector="#wpe_analyser_get_themes .card-body"
+                     data-data='{}'
+                >
+                    <div class="card-header">Themes</div>
+                    <div class="card-body">
+                        <div class="progress d-none" style="position: relative;">
+                            <div class="progress-bar progress-bar-striped indeterminate"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PLUGINS -->
+        <div class="row">
+            <div class="col">
+                <div class="card w-100 report-run-immediate" id="wpe_analyser_get_plugins"
+                     data-action="wpe_analyser_get_plugins"
+                     data-trigger-event="immediate"
+                     data-body-selector="#wpe_analyser_get_plugins .card-body"
+                     data-data='{}'
+                >
+                    <div class="card-header">Plugins</div>
+                    <div class="card-body">
+                        <div class="progress d-none" style="position: relative;">
+                            <div class="progress-bar progress-bar-striped indeterminate"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GTMETRIX -->
+        <div class="row">
+            <div class="col">
+                <div class="card w-100 report-run-on-event <?= $isGTMetrixDisable ?>" id="wpe_analyser_get_gtmetrix"
+                     data-action="wpe_analyser_get_gtmetrix"
+                     data-trigger-selector="#wpe_analyser_get_gtmetrix button"
+                     data-trigger-event="click"
+                     data-body-selector="#wpe_analyser_get_gtmetrix .card-body"
+                     data-data='{}'
+                >
+                    <div class="card-header">Performance <small>(based on GTMetrix)</small>
+                        <button <?= $isGTMetrixDisable ?> class="btn btn-primary btn-xs action-btn float-right"
+                                data-ajax-action="wpe_analyser_get_gtmetrix">
+                            Run Report
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="disabled-message d-none">DISABLED: Set API Credentials in Settings.</div>
+                        <div class="progress d-none" style="position: relative;">
+                            <div class="progress-bar progress-bar-striped indeterminate"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DOMAIN -->
+        <div class="row">
+            <div class="col">
+                <div class="card w-100 report-run-on-event <?= $isSecurityTrailDisable ?>" id="wpe_analyser_get_domain"
+                     data-action="wpe_analyser_get_domain"
+                     data-trigger-selector="#wpe_analyser_get_domain button"
+                     data-trigger-event="click"
+                     data-body-selector="#wpe_analyser_get_domain .card-body"
+                     data-data='{}'
+                >
+                    <div class="card-header">Domain Info <small>(based on Security Trails)</small>
+                        <button <?= $isSecurityTrailDisable ?>
+                                class="btn btn-primary btn-xs action-btn float-right"
+                                data-ajax-action="wpe_analyser_get_domain">Run
+                            Report
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="disabled-message d-none">DISABLED: Set API Credentials in Settings.</div>
+                        <div class="progress d-none" style="position: relative;">
+                            <div class="progress-bar progress-bar-striped indeterminate"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function ($) {
+        $(document).ready(function () {
+
+            $('#saveReportContainer').ajaxToHtmlContainer(
+                {
+                    logEvents: true,
+                    dataProvider: function () {
+                        return {
+                            nonce: "<?= $commonNonce ?>",
+                            data: $('#report-content').html()
+                        }
+                    },
+                    onTriggerCallback: function () {
+                        console.info('REPORT SAVED');
+                        $('#saveReportContainer').removeClass('d-none')
+                    },
+                    onDoneCallback: function (result) {
+                        $('#saveReportContainer .message-body').html(
+                            '<div class="alert alert-success">' + result + '</div>'
+                        )
+                    }
+                }
+            );
+        })
+
+    })(jQuery)
+
+</script>
+

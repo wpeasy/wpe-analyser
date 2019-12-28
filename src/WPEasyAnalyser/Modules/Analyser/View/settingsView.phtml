@@ -1,0 +1,85 @@
+<?php
+$settingsConf  = \WPEasyAnalyser\Modules\Analyser\Controller\ModuleController::$moduleConfig['settings'];
+$optionName    = $settingsConf['optionName'];
+$settings      = get_option($optionName);
+$settingsNonce = wp_create_nonce(\WPEasyAnalyser\Modules\Analyser\Controller\SettingsController::$nonceAction)
+?>
+
+<form method="post" novalidate="novalidate" id="settingsForm">
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="<?= $settingsNonce ?>"/>
+    <div class="container-fluid wpe-div-table table-striped">
+        <h2>GTMetrix API Credentials</h2>
+        <div class="row">
+            <div class="col-12 col-sm-2" >
+                Email
+            </div>
+            <div class="col-12 col-sm-5">
+                <input
+                        type="email"
+                        class="form-control"
+                        name="<?= $optionName ?>[gtmetrix_email]"
+                        placeholder="EMAIL"
+                        value="<?= @$settings['gtmetrix_email']?>"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-2">
+                API Key
+            </div>
+            <div class="col-12 col-sm-5">
+                <input
+                        type="text"
+                        class="form-control"
+                        name="<?= $optionName ?>[gtmetrix_api_key]"
+                        placeholder="API KEY"
+                        value="<?= @$settings['gtmetrix_api_key']?>"
+                />
+            </div>
+        </div>
+
+        <h2>Security Trails API Credentials</h2>
+        <div class="row">
+            <div class="col-12 col-sm-2">
+                API Key
+            </div>
+            <div class="col-12 col-sm-5">
+                <input
+                        type="text"
+                        class="form-control"
+                        name="<?= $optionName ?>[securitytrails_api_key]"
+                        placeholder="API KEY"
+                        value="<?= @$settings['securitytrails_api_key']?>"
+                />
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary " id="submitButton">Save Changes <span class="wpe-spinner-small d-none"></span></button>
+</form>
+<script>
+    (function ($) {
+        var $settingsFrom = $('#settingsForm');
+        var $submitButtonSpinner = $('#submitButton .wpe-spinner-small');
+        $settingsFrom.on('submit', function (e) {
+            e.preventDefault();
+            $submitButtonSpinner.removeClass('d-none');
+            $.post(
+                {
+                    url : window.ajaxurl,
+                    data: {action: 'wpe_analyser_save', nonce: $('#_wpnonce').val(), data: $(this).serialize()}
+                }
+            )
+            .done(function (result) {
+                location.reload();
+            })
+            .fail(function (err) {
+                console.log('ERROR', err);
+
+            })
+            .always(function () {
+                $submitButtonSpinner.addClass('d-none');
+            })
+        })
+    })(jQuery)
+</script>

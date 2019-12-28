@@ -1,0 +1,52 @@
+
+<div class="wrap wpe-admin-wrapper">
+    <div class="container-fluid">
+        <div class="row wpe-header-section">
+            <div class="col-xs-12">
+                <img src="<?= $wpeExtUrl ?>img/trans-wpeasy@2x.png"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row wpe-dark-section">
+            <div class="col">
+                <h2>Active WPEasy Plugins</h2>
+                <div class="wpe-plugins-table">
+                    <table class="table table-striped table-bordered ">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Plugin Name</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+						<?php foreach ( $plugins as $name => $detail ): ?>
+                            <tr>
+                                <td><?= $name ?></td>
+                                <td><?= $detail['pluginDescription'] ?></td>
+                            </tr>
+						<?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row wpe-white-section">
+            <div class="col-sm-4">
+                <img src="<?= $wpeExtUrl ?>img/inv-its-like-roadside.png" class="img-fluid"/>
+            </div>
+            <div class="col-sm-8">
+                <h2>WordPress Management and Support Packages.</h2>
+                <ul>
+                    <li>Help & Support</li>
+                    <li>Monitoring & Reporting</li>
+                    <li>Backup & Security</li>
+                </ul>
+                <a href="https://www.wpeasy.net/our-plans/" class="btn btn-lg btn-primary">See our plans</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<?php
+global $wpdb;
+$nonce             = wp_create_nonce( 'wpe_analyser_get_plugins' );
+$currentVersionObj = get_site_transient( 'update_core' );
+$currentUpdates    = $currentVersionObj->updates[0];
+
+
+//var_dump($_SERVER);
+$accountRoot = $_SERVER['DOCUMENT_ROOT'];
+$status      = [
+	'Server Software'   => [
+		'description' => '',
+		'value'       => $_SERVER['SERVER_SOFTWARE'],
+		'status'      => 'OK'
+	],
+	'SSL'               => [
+		'description' => '',
+		'value'       => $_SERVER['HTTPS'] === 'on' ? 'YES' : 'NO',
+		'status'      => $_SERVER['HTTPS'] === 'on' ? 'OK' : 'NO SSL'
+	],
+	'PHP Version'       => [
+		'description' => '',
+		'value'       => phpversion(),
+		'status'      => version_compare( phpversion(), '7.1' ) < 0 ? 'Should be updated' : 'OK'
+	],
+	'WordPress Version' => [
+		'description' => '',
+		'value'       => get_bloginfo( 'version' ),
+		'status'      => version_compare( get_bloginfo( 'version' ), $currentUpdates->current ) != 0 ? 'Out of date' : 'OK'
+	],
+	'MYSQL Version'     => [
+		'description' => '',
+		'value'       => $wpdb->db_version(),
+		'status'      => version_compare( $wpdb->db_version(), '5.7' ) < 0 ? 'Out of date' : 'OK'
+	],
+	'Memory Limit'      => [
+		'description' => '',
+		'value'       => ini_get( 'memory_limit' ),
+		'status'      => (int) ini_get( 'memory_limit' ) >= 256 ? 'OK' : 'Should be at least 256M'
+	],
+	'Memory PeakUsage'  => [
+		'description' => '',
+		'value'       => ByteUnits\bytes( memory_get_peak_usage() )->format( 'MB' ),
+		'status'      => 'OK'
+	],
+	'Script Timeout'    => [
+		'description' => '',
+		'value'       => ini_get( 'max_execution_time' ) . ' sec',
+		'status'      => ini_get( 'max_execution_time' ) >= 300 ? 'OK' : 'Should be at least 300'
+	],
+	'Max File Upload'   => [
+		'description' => '',
+		'value'       => ini_get( 'upload_max_filesize' ),
+		'status'      => (int) ini_get( 'upload_max_filesize' ) >= 5 ? 'OK' : 'Should be at least 5MB'
+	],
+	'Max Post Size'     => [
+		'description' => '',
+		'value'       => ini_get( 'post_max_size' ),
+		'status'      => (int) ini_get( 'post_max_size' ) >= 5 ? 'OK' : 'Should be at least 5MB'
+	]
+
+]
+?>
+
+<table class="table table-striped table-sm">
+    <thead class="thead-dark">
+    <tr>
+        <th>Item</th>
+        <th>Value</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+	<?php foreach ( $status as $item => $props ): $class= $props['status'] === 'OK'? '': 'table-warning';?>
+        <tr class="<?= $class ?>">
+            <th><?= $item ?></th>
+            <td><?= $props['value'] ?></td>
+            <td><?= $props['status'] ?></td>
+        </tr>
+	<?php endforeach; ?>
+    </tbody>
+</table>
+
+

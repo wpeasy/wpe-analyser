@@ -1,0 +1,58 @@
+<?php
+
+$wpCurrentTheme = wp_get_theme();
+
+$wpAllThemes = wp_get_themes();
+
+$allThemes = array_map(function (\WP_Theme $el){
+	return [
+		'name' => $el->display('Name'),
+		'version' => $el->display('Version'),
+		'update'=> $el->update == false
+	];
+}, $wpAllThemes);
+
+//$themUpdates = get_site_transient('update_themes');
+//var_dump($themUpdates);
+
+?>
+<table class="table table-bordered table-sm">
+	<thead class="thead-dark">
+	<tr>
+		<th>Theme</th>
+		<th>Installed Version</th>
+		<th>Up to date?</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td colspan="4"><h4>Active Theme</h4></td>
+	</tr>
+	<tr class=" <?= $wpCurrentTheme->update === false  ? 'table-success' : 'table-danger' ?>">
+		<td><?= $wpCurrentTheme->display('Name')?></td>
+		<td><?= $wpCurrentTheme->display('Version') ?></td>
+		<td><?= $wpCurrentTheme->update == false ? 'YES':'UPDATE NEEDED' ?></td>
+	</tr>
+
+	<tr>
+		<td colspan="4"><h4>Not Active Themes</h4></td>
+	</tr>
+
+	<?php foreach ($allThemes as $theme) :
+        if($theme['name'] ===  $wpCurrentTheme->display('Name')) continue;
+		$class = $theme['update']? 'table-warning' : 'table-danger';
+		?>
+
+	<tr class=" <?= $class ?>">
+		<td><?= $theme['name'] ?></td>
+		<td><?= $theme['version'] ?></td>
+		<td><?= $theme['update']? 'YES':'UPDATE NEEDED' ?></td>
+	</tr>
+	<?php endforeach; ?>
+	</tbody>
+</table>
+<p>*Notes:</p>
+<ul>
+	<li>All inactive Themes should be removed to improve security.</li>
+	<li>The Active Theme should be updated.</li>
+</ul>

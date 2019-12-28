@@ -1,0 +1,115 @@
+<?php
+$currentRecords = $data->current_dns;
+?>
+<h3>For Domain <?= $domain ?></h3>
+<h4>Note: this report only works for &quot;Registrable Domains&quot;. The API will not resolve records for sub domains.</h4>
+<table class="table table-sm" >
+    <thead></thead>
+    <tbody>
+    <tr>
+        <th>Name Servers</th>
+        <td>
+	        <table class="table table-sm table-striped" >
+				<thead class="thead-dark">
+				<tr>
+					<th>Organisation</th>
+					<th>Name Server</th>
+				</tr>
+				</thead>
+		        <tbody>
+		        <?php foreach ( $currentRecords->ns->values as $ns ): ?>
+		        <tr>
+			        <td><?= $ns->nameserver_organization ?></td>
+			        <td><?= $ns->nameserver ?></td>
+		        </tr>
+		        <? endforeach; ?>
+		        </tbody>
+	        </table>
+        </td>
+    </tr>
+    <tr>
+        <th>SOA</th>
+        <td>
+	        <table class="table table-sm table-striped" >
+		        <thead class="thead-dark">
+		        <tr>
+			        <th>TTL</th>
+			        <th>Email</th>
+		        </tr>
+		        </thead>
+		        <tbody>
+		        <?php foreach ( $currentRecords->soa->values as $item ): ?>
+			        <tr>
+				        <td><?= $item->ttl ?></td>
+				        <td><?= $item->email ?></td>
+			        </tr>
+		        <? endforeach; ?>
+		        </tbody>
+	        </table>
+        </td>
+    </tr>
+    <tr>
+        <th>MX Records</th>
+        <td>
+	        <table class="table table-sm table-striped" >
+		        <thead class="thead-dark">
+		        <tr>
+			        <th>Organisation</th>
+			        <th>Priority</th>
+			        <th>Hostname</th>
+		        </tr>
+		        </thead>
+		        <tbody>
+		        <?php foreach ( $currentRecords->mx->values as $item ): ?>
+			        <tr>
+				        <td><?= $item->hostname_organization ?></td>
+				        <td><?= $item->priority ?></td>
+				        <td><?= $item->hostname ?></td>
+			        </tr>
+		        <? endforeach; ?>
+		        </tbody>
+	        </table>
+        </td>
+    </tr>
+    <tr>
+        <th>A Records</th>
+        <td>
+	        <table class="table table-sm table-striped" >
+		        <thead class="thead-dark">
+		        <tr>
+			        <th>Organisation</th>
+			        <th>IP</th>
+		        </tr>
+		        </thead>
+		        <tbody>
+		        <?php foreach ( $currentRecords->a->values as $item ): ?>
+			        <tr>
+				        <td><?= $item->ip_organization ?></td>
+				        <td><?= $item->ip ?></td>
+			        </tr>
+		        <? endforeach; ?>
+		        </tbody>
+	        </table>
+        </td>
+    </tr>
+    <tr>
+        <th>TXT Records</th>
+        <td>
+	        <table class="table table-sm table-striped" >
+		        <thead class="thead-dark">
+		        <tr>
+			        <th>Value</th>
+		        </tr>
+		        </thead>
+		        <tbody>
+		        <?php foreach ( $currentRecords->txt->values as $item ): ?>
+			        <tr>
+				        <td><?= $item->value ?></td>
+			        </tr>
+		        <? endforeach; ?>
+		        </tbody>
+	        </table>
+        </td>
+    </tr>
+    </tbody>
+</table>

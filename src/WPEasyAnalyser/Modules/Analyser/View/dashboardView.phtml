@@ -1,0 +1,66 @@
+<?php $commonNonce = \WPEasyAnalyser\Modules\Analyser\Controller\ModuleController::$ajaxNonce;
+?>
+<div id="wpeAnalyserContainer" class="fade">
+    <div class="wpe-card-container mb-1 wpe-card-info">
+        <div class="wpe-card-header p-2">
+            About this module
+        </div>
+        <div class="wpe-card-body p-2">
+            <p>This module analyses your WordPress installation and performance</p>
+        </div>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item ">
+            <a class="nav-link active" tabindex="-1" data-toggle="tab" href="#analyserReport">Report Generator</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" tabindex="-1" data-toggle="tab" href="#analyserSavedReports" data-ajax-action="wpe_analyser_get_saved_reports">Saved Reports</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" tabindex="-1" data-toggle="tab" href="#analyserSettings">Settings</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" tabindex="-1" data-toggle="tab" href="#analyserInstructions">Instructions</a>
+        </li>
+    </ul>
+    <div class="tab-content container-fluid">
+        <div class="tab-pane active" id="analyserReport">
+			<?php include __DIR__ . '/reportGeneratorView.phtml' ?>
+        </div>
+        <div class="tab-pane fade" id="analyserSavedReports">
+	        <?php include __DIR__ . '/savedReportsDashboardView.phtml' ?>
+        </div>
+        <div class="tab-pane fade" id="analyserSettings">
+			<?php include __DIR__ . '/settingsView.phtml' ?>
+        </div>
+        <div class="tab-pane fade" id="analyserInstructions">
+			<?php include __DIR__ . '/instructionsView.phtml' ?>
+        </div>
+    </div>
+</div>
+<script>
+    (function ($) {
+
+        let nonceOnlyDataProvider = ()=>{
+            return {nonce: "<?= $commonNonce ?>" , testVar: 23}
+        }
+
+        $(document).ready(function () {
+            //Show the Analyser UI. Hidden initially allowing time for the CSS to load
+            $('#wpeAnalyserContainer').addClass('show');
+
+            /**
+             * INITIALISE REPORTS
+             * Note: The following are for reports that simply get HTML from an AJAX call. These calls only require a "nonce" parameter
+             * For any reports that require additional parameters, they will require a separate dataProvider function
+             * Any reports that require an onDone, onError or onAlways also need to be initialised separately
+             * Therefore the aggregated initialisations below require an identifying on the target report blocks.
+             */
+            //Initialise all reports that run immediately.
+            $('.report-run-immediate').ajaxToHtmlContainer({logEvents: true, dataProvider: nonceOnlyDataProvider});
+
+            //Initialise all reports that run from a trigger.
+            $('.report-run-on-event').ajaxToHtmlContainer({logEvents: true, dataProvider: nonceOnlyDataProvider});
+        })
+    })(jQuery)
+</script>
