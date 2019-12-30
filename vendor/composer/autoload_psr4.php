@@ -9,6 +9,7 @@ return array(
     'WPEasyLibrary\\' => array($vendorDir . '/wpeasy/wpeasy-library/src/WPEasyLibrary'),
     'WPEasyAnalyser\\' => array($baseDir . '/src/WPEasyAnalyser'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Pdp\\' => array($vendorDir . '/jeremykendall/php-domain-parser/src'),
     'Entrecore\\GTMetrixClient\\' => array($vendorDir . '/philcook/gtmetrix/src'),
     'ByteUnits\\' => array($vendorDir . '/gabrielelana/byte-units/src/ByteUnits'),

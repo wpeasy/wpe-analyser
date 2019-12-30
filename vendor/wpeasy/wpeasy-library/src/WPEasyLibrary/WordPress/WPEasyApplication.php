@@ -91,7 +91,7 @@ HTML;
     static function admin_enqueue_scripts()
     {
         $callingPluginURL = self::$firstCallingPluginConf['pluginURL'];
-        $assetsURL = $callingPluginURL . 'vendor/alanblair/wpeasy-library/assets/';
+        $assetsURL = $callingPluginURL . 'vendor/wpeasy/wpeasy-library/assets/';
         wp_register_style( 'wpe-lib-common', $assetsURL . 'css/wpe-lib-common.style.css');
         wp_register_style( 'wpe-lib-admin', $assetsURL . 'css/wpe-lib-admin.style.css', ['wpe-lib-common']);
 
@@ -108,7 +108,7 @@ HTML;
     static function wp_enqueue_scripts()
     {
         $callingPluginURL = self::$firstCallingPluginConf['pluginURL'];
-        $assetsURL = $callingPluginURL . 'vendor/alanblair/wpeasy-library/assets/';
+        $assetsURL = $callingPluginURL . 'vendor/wpeasy/wpeasy-library/assets/';
         wp_register_style( 'wpe-lib-common', $assetsURL . 'css/wpe-lib-common.style.css');
         wp_register_style( 'wpe-lib-frontend', $assetsURL . 'css/wpe-lib-frontend.style.css', ['wpe-lib-common']);
         wp_enqueue_style('wpe-lib-frontend');

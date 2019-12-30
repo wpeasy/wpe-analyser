@@ -19,6 +19,7 @@ class ComposerStaticInitd7aafc28d51a86f57c72b794454d1f6b
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
+            'Psr\\Log\\' => 8,
             'Pdp\\' => 4,
         ),
         'E' => 
@@ -43,6 +44,10 @@ class ComposerStaticInitd7aafc28d51a86f57c72b794454d1f6b
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Pdp\\' => 
         array (
