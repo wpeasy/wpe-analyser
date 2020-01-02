@@ -45,7 +45,8 @@ import 'jquery'
                 let valueToCopy;
 
                 //Update CSS
-                $allCopyableElements.removeClass('copied')
+                $.fn.clickToCopy.clearCopiedFlags(settings.copyableElementsSelector);
+
                 $self.addClass('copied')
 
                 //Allow for input as first child of DIV or SPAN
@@ -68,8 +69,9 @@ import 'jquery'
         }
 
         this.initialize()
+    }
 
-
-
+    $.fn.clickToCopy.clearCopiedFlags = (selector = '.wpe_clickToCopy' ) => {
+        $(selector).removeClass('copied')
     }
 })(jQuery)
