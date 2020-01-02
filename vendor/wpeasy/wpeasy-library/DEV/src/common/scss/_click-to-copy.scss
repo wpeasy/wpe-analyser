@@ -1,0 +1,38 @@
+
+#wpe_copyTextInput {
+  position: absolute;
+  top: -1000px;
+}
+
+.wpe_clickToCopy {
+  padding: 12px;
+  border: 1px solid #ccc;
+  position: relative;
+  cursor: pointer;
+  background-color: #eefdff;
+
+  &:after{
+    content: 'click to copy';
+    position: absolute;
+    color: #fff;
+    top:0;
+    right: 0;
+    background: #06b1cc;
+    font-family: Arial;
+    line-height: 1;
+    font-size: 9px;
+    padding: 3px;
+  }
+
+  &.copied {
+    border: 1px solid #00cc34;
+    background-color: #e3fff6;
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    transition: all .4s;
+
+    &:after{
+      background: #008b27;
+      content: 'copied';
+    }
+  }
+}

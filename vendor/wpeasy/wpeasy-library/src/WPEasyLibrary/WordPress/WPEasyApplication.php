@@ -90,13 +90,12 @@ HTML;
 
     static function admin_enqueue_scripts()
     {
+        self::wp_enqueue_common();
+
         $callingPluginURL = self::$firstCallingPluginConf['pluginURL'];
         $assetsURL = $callingPluginURL . 'vendor/wpeasy/wpeasy-library/assets/';
-        wp_register_style( 'wpe-lib-common', $assetsURL . 'css/wpe-lib-common.style.css');
-        wp_register_style( 'wpe-lib-admin', $assetsURL . 'css/wpe-lib-admin.style.css', ['wpe-lib-common']);
 
-        wp_register_script('wpe-lib-vendor', $assetsURL . 'js/wpe-lib-vendor.bundle.js', false, true);
-        wp_register_script('wpe-lib-common', $assetsURL . 'js/wpe-lib-common.bundle.js', ['wpe-lib-vendor'], false, true);
+        wp_register_style( 'wpe-lib-admin', $assetsURL . 'css/wpe-lib-admin.style.css', ['wpe-lib-common']);
         wp_register_script('wpe-lib-admin', $assetsURL . 'js/wpe-lib-admin.bundle.js', ['jquery','wpe-lib-common'], false, true);
         wp_enqueue_style('wpe-lib-admin'); //Done here so css is in header.. Will be on all Admin pages though.
 
@@ -107,16 +106,28 @@ HTML;
 
     static function wp_enqueue_scripts()
     {
+        self::wp_enqueue_common();
+
         $callingPluginURL = self::$firstCallingPluginConf['pluginURL'];
         $assetsURL = $callingPluginURL . 'vendor/wpeasy/wpeasy-library/assets/';
-        wp_register_style( 'wpe-lib-common', $assetsURL . 'css/wpe-lib-common.style.css');
+
         wp_register_style( 'wpe-lib-frontend', $assetsURL . 'css/wpe-lib-frontend.style.css', ['wpe-lib-common']);
         wp_enqueue_style('wpe-lib-frontend');
 
-        wp_register_script('wpe-lib-vendor', $assetsURL . 'js/wpe-lib-vendor.bundle.js', ['jquery'], false,true);
-        wp_register_script('wpe-lib-common', $assetsURL . 'js/wpe-lib-common.bundle.js', ['wpe-lib-vendor'], false, true);
+
         wp_register_script('wpe-lib-frontend', $assetsURL . 'js/wpe-lib-frontend.bundle.js', ['jquery','wpe-lib-common'], false, true);
         wp_enqueue_script('wpe-lib-frontend');
+    }
+
+    static function wp_enqueue_common( )
+    {
+        $callingPluginURL = self::$firstCallingPluginConf['pluginURL'];
+        $assetsURL = $callingPluginURL . 'vendor/wpeasy/wpeasy-library/assets/';
+        wp_register_style( 'wpe-lib-vendor', $assetsURL . 'css/wpe-lib-vendor.bundle.css');
+        wp_register_style( 'wpe-lib-common', $assetsURL . 'css/wpe-lib-common.style.css', ['wpe-lib-vendor']);
+
+        wp_register_script('wpe-lib-vendor', $assetsURL . 'js/wpe-lib-vendor.bundle.js', ['jquery'], false,true);
+        wp_register_script('wpe-lib-common', $assetsURL . 'js/wpe-lib-common.bundle.js', ['wpe-lib-vendor'], false, true);
     }
 
     /**
