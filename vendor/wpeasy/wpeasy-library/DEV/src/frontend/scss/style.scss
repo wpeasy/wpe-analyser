@@ -1,3 +1,4 @@
-.frontend{
-  color: red;
+//Namespace to avoid conflicts
+.wpe {
+  @import "bootstrap";
 }
